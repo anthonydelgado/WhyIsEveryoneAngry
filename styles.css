@@ -1,0 +1,76 @@
+body {
+  background-color: #555;
+  font-family: 'Roboto', sans-serif;
+}
+
+div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.top {
+  min-height: 75px;
+  flex-direction: column;
+}
+
+.video,
+.speech {
+  flex-direction: column;
+  min-height: 400px;
+  width: 50%;
+}
+
+.videoCanvas,
+.framePictureCanvas,
+.speechCanvas,
+.avgChartCanvas,
+.timeChartCanvas,
+.frameInfoCanvas {
+  min-width: 300px;
+  min-height: 300px;
+  background-color: black;
+}
+
+.speechCanvas,
+.avgChartCanvas,
+.timeChartCanvas,
+.frameInfoCanvas {
+  width: 90%;
+  padding-left: 2.5%;
+  padding-right: 2.5%;
+}
+
+.speechCanvas {
+  display: block;
+  max-height: 300px;
+  overflow: scroll;
+  background-color: #DDD;
+}
+
+.phrase {
+  width: 100%;
+  min-height: 20px;
+  justify-content: flex-start;
+  margin: 1%;
+}
+
+.content {
+  margin-left: 2%;
+}
+
+.charts,
+.frame {
+  flex-direction: column;
+  min-height: 800px;
+  width: 50%;
+}
+
+.timeChart,
+.avgChart,
+.framePicture,
+.frameInfo {
+  min-height: 400px;
+  width: 100%;
+  flex-direction: column;
+}

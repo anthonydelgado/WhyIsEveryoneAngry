@@ -2,11 +2,153 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Charts for LoLovers</title>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <title>Giancarlo Lives! (Pending Title)</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles/main.css" type="text/css" media="all">
+
   </head>
   <body>
-    <div id="time-series"></div>
-    <script type="text/javascript" src="charts/charts.js"></script>
+
+    <div class="top">
+      <h1>Giancarlo Lives! (Pending Title)</h1>
+      <div class="record">
+        <h2>Recording</h2>
+        <button id="startBtn" disabled="disabled" onclick="startRecordingFrames()">Start</button>
+        <button id="stopBtn" disabled="disabled" onclick="stopRecordingFrames()">Stop</button>
+      </div>
+    </div>
+
+    <div class="stream">
+
+      <div class="video">
+        <h2>Live Stream</h2>
+        <div class="videoCanvas">
+          <div class="camera">
+            <video id="video">Video stream not available.</video>
+          </div>
+        </div>
+        <span id="timer">Time: 0:00</span>
+      </div>
+      <canvas id="canvas"></canvas>
+
+      <div class="speech">
+        <h2>Speech</h2>
+        <div class="speechCanvas"></div>
+      </div>
+
+    </div>
+
+    <div class="results">
+
+      <div class="charts">
+        <div class="timeChart">
+          <h2>Time chart</h2>
+          <div class="timeChartCanvas" id="time-series"></div>
+        </div>
+        <div class="avgChart">
+          <h2>Average chart</h2>
+          <div class="avgChartCanvas"></div>
+        </div>
+      </div>
+
+      <div class="frame">
+        <div class="framePicture">
+          <h2>framePicture</h2>
+          <div class="framePictureCanvas">
+            <img src="" />
+          </div>
+        </div>
+        <div class="frameInfo">
+          <h2>frameInfo</h2>
+          <div class="frameInfoCanvas"></div>
+        </div>
+      </div>
+
+    </div>
+
+    <table style="display:none" width="100%"> <tr> <td></td><td> <h1 style="font-weight:500;">Speech Recognition</h1> <h2 style="font-weight:500;">Microsoft Cognitive Services</h2> </td></tr><tr> <td align="right"><a href="https://www.microsoft.com/cognitive-services/en-us/sign-up" target="_blank">Subscription</a>:</td><td><input id="key" type="text" size="40" value="70c52b11c9d948088d7e85a212ce9538"></td></tr><tr> <td align="right">Laguage:</td><td align="left"> <select id="languageOptions"> <option value="zh-CN">Chinese - CN</option> <option value="en-GB">English - GB</option> <option value="en-US" selected="selected">English - US</option> <option value="fr-FR">French - FR</option> <option value="de-DE">German - DE</option> <option value="it-IT">Italian - IT</option> <option value="es-ES">Spanish - ES</option> <option value="ar-EG">Arabic - EG</option> </select> </td></tr><tr> <td align="right">Format:</td><td align="left"> <select id="formatOptions"> <option value="Simple" selected="selected">Simple Result</option> <option value="Detailed">Detailed Result</option> </select> </td></tr><tr> <td></td><td> <button id="startBtn" disabled="disabled">Start</button> <button id="stopBtn" disabled="disabled">Stop</button> </td></tr><tr> <td></td><td>Current hypothesis: <span id="hypothesisDiv"></span></td></tr><tr> <td></td><td> <textarea id="resultDiv" style="width:500px;height:200px"></textarea> </td></tr><tr> <td></td><td> <textarea id="phraseDiv" style="width:500px;height:200px"></textarea> </td></tr><tr> <td></td><td>Status: <span id="statusDiv"></span></td></tr></table>
+
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.min.js"
+      integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+      crossorigin="anonymous"></script>
+      <!-- The SDK has a dependency on requirejs (http://requirejs.org/). -->
+      <script src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.3.3/require.min.js"></script>
+      <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+      <script>
+          // Special handling to let the sample work when loaded directly from file system.
+          if (window.location.protocol == "file:") {
+              document.write('\<script src="http://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.3/require.min.js">\<\/script>');
+          }
+      </script>
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+      <script src="scripts/capture.js"></script>
+      <script type="text/javascript">
+
+      // Store all image data here
+      let imageData = [];
+
+      // record thread
+      let recordInterval = null;
+
+      // Call upload photo to server
+      function sendImageDataToServer(data) {
+        let frame = {time: Date.now(), photoId: null, emotions: null}
+
+        var request = new XMLHttpRequest();
+        request.open('POST', '/api/upload', true);
+
+        // On Receive Response
+        request.onreadystatechange = function() {
+          if (request.readyState == XMLHttpRequest.DONE) {
+            // do something with response text here
+            let result = JSON.parse(request.responseText);
+
+            if(typeof result.result === 'string') {
+              console.log('Could not get data from azure')
+            } else {
+              console.log('Received', result);
+              frame.photoId = result.photoId;
+              frame.emotions = result.result;
+              imageData.push(frame);
+              $('.framePictureCanvas img').attr('src', `photos/${imageData.length - 1}.png`)
+              console.log('Total image date', imageData);
+            }
+          }
+        }
+        request.send(data);
+      }
+
+      function startRecordingFrames(time = 4000) {
+        console.log('startRecordingFrames', time);
+        fetch('/upload/reset').then(() => {
+          imageData = [];
+          takepicture();
+          recordInterval = setInterval(takepicture, time);
+        })
+      }
+
+      function stopRecordingFrames() {
+        console.log('stopRecordingFrames');
+        clearInterval(recordInterval);
+      }
+      </script>
+
+      <!-- SDK REFERENCE -->
+      <script src="speech.browser.sdk-min.js"></script>
+      <script src="speech.js"></script>
+      <script src="charts/charts.js"></script>
   </body>
 </html>
+
+<!-- <div class="phrase">
+  <div class="timestamp">
+    <span>0:00</span>
+  </div>
+  <div class="content">
+    <span>This is a sample text</span>
+  </div>
+</div> -->

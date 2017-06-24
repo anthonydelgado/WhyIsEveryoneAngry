@@ -1,8 +1,3 @@
-const _ = require('lodash');
-
-const emo = require('../data/emoDummy').data;
-const audio = require('../data/audioDummy').data;
-
 function format(emoData, audioData) {
   const data = [];
   audioData.forEach(clip => {
@@ -24,9 +19,9 @@ function format(emoData, audioData) {
     const result = [time, ...emotesAvg];
     data.push(result);
   })
-  console.log(data);
+  return data;
 }
-format(emo, audio);
+
 
 function msToTime(timeStamp) {
   const ms = timeStamp % 1000;
