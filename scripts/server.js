@@ -34,5 +34,5 @@ app.get('/photo/:id', function(req, res) {
   res.sendFile(path.resolve('photos/' + req.params.id + '.png'));
 })
 
-console.log('serving on http://localhost:3001');
-app.listen(3001);
+console.log('serving on http://localhost:3000');
+app.listen(3000);
