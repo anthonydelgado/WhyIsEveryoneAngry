@@ -1,0 +1,23 @@
+{
+  "name": "league-of-love",
+  "version": "1.0.0",
+  "description": "",
+  "main": "api.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dhamberlin/leagueOfLove.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dhamberlin/leagueOfLove/issues"
+  },
+  "homepage": "https://github.com/dhamberlin/leagueOfLove#readme",
+  "dependencies": {
+    "request": "^2.81.0",
+    "request-promise-native": "^1.0.4"
+  }
+}
