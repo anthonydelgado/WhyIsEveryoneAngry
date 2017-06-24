@@ -1,8 +1,33 @@
-var express = require('express')
-var app = express()
+var express = require('express');
+var morgan = require('morgan');
+var bodyParser = require('body-parser');
+var base64Img = require('base64-img');
+
+var app = express();
+
+// parse application/x-www-form-urlencoded 
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }))
  
+// parse application/json 
+app.use(bodyParser.text({ limit: '50mb'}))
+
+// log requests
+app.use(morgan('tiny'));
+
+
+
 app.use(express.static(__dirname + '/../'));
 
-console.log('serving on http://localhost:3000');
 
-app.listen(3000);
+let idx = 0;
+
+app.post('/api/upload', function(req, res) {
+  //console.log(req.body);
+  console.log('got upload');
+
+  base64Img.img(req.body, 'photos', idx++, function(err, filepath) {});
+
+})
+
+console.log('serving on http://localhost:3001');
+app.listen(3001);

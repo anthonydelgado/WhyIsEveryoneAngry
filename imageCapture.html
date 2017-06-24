@@ -2,8 +2,54 @@
 <html>
 <head>
   <title>Testing image capture to azure</title>
+  <link rel="stylesheet" href="styles/main.css" type="text/css" media="all">
+  <script src="scripts/capture.js"></script>
 </head>
 <body>
-hi
+<div class="contentarea">
+  <h1>
+    MDN - WebRTC: Still photo capture demo
+  </h1>
+
+  <p>
+    This example demonstrates how to set up a media stream using your built-in webcam, fetch an image from that stream, and create a PNG using that image.
+  </p>
+
+  <div class="camera">
+
+    <video id="video">Video stream not available.</video>
+
+    <button id="startbutton">Take photo</button> 
+  </div>
+  <canvas id="canvas">
+  </canvas>
+  <a href="#" id="downloader" onclick="download()" download="image.png">Download!</a>
+  <div class="output">
+    <img id="photo" alt="The screen capture will appear in this box."> 
+  </div>
+  <p>
+    Visit our article <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebRTC_API/Taking_still_photos"> Taking still photos with WebRTC</a> to learn more about the technologies used here.
+  </p>
+</div>
+
+
+<script type="text/javascript">
+  
+function download(){
+    document.getElementById("downloader").download = "image.png";
+    document.getElementById("downloader").href = document.getElementById("canvas").toDataURL("image/png").replace(/^data:image\/[^;]/, 'data:application/octet-stream');
+}
+
+function sendImageDataToServer(data) {
+  // with plain JS 
+  var request = new XMLHttpRequest();
+  request.open('POST', '/api/upload', true);
+  request.send(data);
+}
+
+
+</script>
+
+
 </body>
 </html>

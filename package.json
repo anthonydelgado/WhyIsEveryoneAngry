@@ -17,7 +17,13 @@
   },
   "homepage": "https://github.com/dhamberlin/leagueOfLove#readme",
   "dependencies": {
+    "base64-img": "^1.0.3",
+    "body-parser": "^1.17.2",
+    "datauri": "^1.0.5",
     "express": "^4.15.3",
+    "fs": "0.0.1-security",
+    "morgan": "^1.8.2",
+    "node-png": "^0.4.3",
     "request": "^2.81.0",
     "request-promise-native": "^1.0.4"
   }
