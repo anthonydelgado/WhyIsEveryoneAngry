@@ -8,5 +8,5 @@ request({
     url: 'http://1boidr1j8wt01itylm7cszo5r8.wpengine.netdna-cdn.com/wp-content/themes/ColoradoIndependent/timthumb.php?src=http://coloradoindependent.com/wp-content/uploads/crowd-shot.jpg&w=647&zc=3',
   })
 })
-.then(res => console.log('RESPONSE: ', res))
+.then(res => console.log('RESPONSE: ', JSON.parse(res)))
 .catch(err => console.log(err))
