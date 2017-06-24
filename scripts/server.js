@@ -2,6 +2,7 @@ var express = require('express');
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
 var base64Img = require('base64-img');
+var path = require('path');
 
 var app = express();
 
@@ -27,6 +28,10 @@ app.post('/api/upload', function(req, res) {
 
   base64Img.img(req.body, 'photos', idx++, function(err, filepath) {});
 
+})
+
+app.get('/photo/:id', function(req, res) {
+  res.sendFile(path.resolve('photos/' + req.params.id + '.png'));
 })
 
 console.log('serving on http://localhost:3001');

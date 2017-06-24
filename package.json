@@ -24,6 +24,7 @@
     "fs": "0.0.1-security",
     "morgan": "^1.8.2",
     "node-png": "^0.4.3",
+    "path": "^0.12.7",
     "request": "^2.81.0",
     "request-promise-native": "^1.0.4"
   }
