@@ -46,7 +46,7 @@ function drawChart() {
   const data = google.visualization.arrayToDataTable(rawData);
 
   var options = {
-    title: 'Company Performance',
+    title: 'Audience Reaction',
     curveType: 'function',
     legend: { position: 'bottom' }
   };

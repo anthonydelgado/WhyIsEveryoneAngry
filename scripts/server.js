@@ -29,7 +29,7 @@ let idx = 0;
 // **************************************************************
 // Get NGROK route: run 'ngrok http 3000'
 // This won't be necessary when we deploy
-let ngrokLink = 'http://8a1ec1a4.ngrok.io';
+let ngrokLink = 'http://c87512be.ngrok.io';
 // **************************************************************
 
 // Upload photo and make call to azure
