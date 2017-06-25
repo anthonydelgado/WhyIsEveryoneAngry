@@ -96,7 +96,7 @@
 
       // Call upload photo to server
       function sendImageDataToServer(data) {
-        let frame = {time: Date.now(), photoId: null, emotions: null}
+        let frame = {time: Date.now() - window.startTime, photoId: null, emotions: null}
 
         var request = new XMLHttpRequest();
         request.open('POST', '/api/upload', true);
@@ -114,6 +114,7 @@
               frame.photoId = result.photoId;
               frame.emotions = result.result;
               imageData.push(frame);
+              drawChart();
               $('.framePictureCanvas img').attr('src', `photos/${imageData.length - 1}.png`)
               console.log('Total image date', imageData);
             }
@@ -124,6 +125,7 @@
 
       function startRecordingFrames(time = 4000) {
         console.log('startRecordingFrames', time);
+        window.startTime = Date.now();
         fetch('/upload/reset').then(() => {
           imageData = [];
           takepicture();

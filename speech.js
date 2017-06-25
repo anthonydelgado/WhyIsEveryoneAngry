@@ -109,7 +109,7 @@ document.addEventListener("DOMContentLoaded", function () {
             Setup();
         }
 
-        hypothesisDiv.innerHTML = "";
+        $('.speechCanvas').get(0).innerHTML = "";
         RecognizerStart(SDK, recognizer);
         //time = Date.now();
         startBtn.disabled = true;
@@ -122,6 +122,7 @@ document.addEventListener("DOMContentLoaded", function () {
         RecognizerStop(SDK, recognizer);
         startBtn.disabled = false;
         stopBtn.disabled = true;
+        phrases = [];
 
         clearInterval(interval);
     });
@@ -133,7 +134,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function updateTimer() {
-  time += 500;
+  time = Date.now() - window.startTime;
   // console.log(time)
   $('#timer').html(`Ellapsed Time: ${millisToMinutesAndSeconds(time)}`);
 }
@@ -171,8 +172,8 @@ function UpdateRecognizedPhrase(json) {
         content: json.DisplayText
       });
 
-      const divs = phrases.map(p => {
-        return `<div class="phrase">
+      const divs = phrases.map(p =>
+        `<div class="phrase">
           <div class="timestamp">
             <span>${millisToMinutesAndSeconds(p.time)}</span>
           </div>
@@ -180,7 +181,7 @@ function UpdateRecognizedPhrase(json) {
             <span>${p.content}</span>
           </div>
         </div>`
-      });
+      );
       speechCanvas.html(divs);
     }
     return;

@@ -1,5 +1,4 @@
-const rawData = [
-  ['Seconds',
+const chartLabels = ['Seconds',
   'anger',
   'contempt',
   'disgust',
@@ -7,51 +6,61 @@ const rawData = [
   'happiness',
   'neutral',
   'sadness',
-  'surprise' ],
-  [ '4',
-    0.062852719682524,
-    0.00686425399019525,
-    0.017502256904758616,
-    0.05009051096902055,
-    0.2840591599332,
-    0.44803643209020905,
-    0.034123374662639996,
-    0.09647128347581178 ],
-  [ '8',
-    0.007252974219141,
-    0.00672673840184,
-    0.004954287308431206,
-    0.00022665858931528567,
-    0.6247736670728571,
-    0.31854736921513377,
-    0.015127227167416532,
-    0.02239108654783614 ],
-  [ '12',
-    0.6458618562636365,
-    0.005932734763413464,
-    0.10446115550318182,
-    0.002361058907730409,
-    0.07835265624639799,
-    0.125976772905992,
-    0.024723212102501592,
-    0.012330559080511361 ] ]
-
-
-const chart = document.getElementById('time-series');
+  'surprise' ]
+const chartOptions = {
+  title: 'Audience Reaction',
+  curveType: 'function',
+  legend: { position: 'right' }
+};
+let lineChart;
 
 google.charts.load('current', {'packages':['corechart']});
-google.charts.setOnLoadCallback(drawChart);
+google.charts.setOnLoadCallback(createChart);
+
+function createChart() {
+  lineChart = new google.visualization.LineChart(document.getElementById('time-series'));
+}
 
 function drawChart() {
-  const data = google.visualization.arrayToDataTable(rawData);
+  const data = google.visualization.arrayToDataTable(format(imageData));
+  lineChart.draw(data, chartOptions);
+}
 
-  var options = {
-    title: 'Audience Reaction',
-    curveType: 'function',
-    legend: { position: 'bottom' }
-  };
+function format(emoData) {
+  const data = [chartLabels];
+  console.log('INPUT: ', emoData);
+  _.each(emoData, pic => {
+    console.log('pic: ', pic)
+    const faceScores = pic.emotions.map(face => face.scores);
+    if (faceScores.length > 0) {
+      const emotesTotal = faceScores.reduce((acc, face) => ({
+        anger: face.anger + acc.anger,
+        contempt: face.contempt + acc.contempt,
+        disgust: face.disgust + acc.disgust,
+        fear: face.fear + acc.fear,
+        happiness: face.happiness + acc.happiness,
+        neutral: face.neutral + acc.neutral,
+        sadness: face.sadness + acc.sadness,
+        surprise: face.surprise + acc.surprise,
+      }));
+      const emotesAvg = _.map(emotesTotal, emote => emote / pic.emotions.length);
+      let time = msToTime(pic.time)
+      const result = [time, ...emotesAvg];
+      data.push(result);
+    }
+  })
+  console.log('OUTPUT: ', data)
+  return data;
+}
 
-  var chart = new google.visualization.LineChart(document.getElementById('time-series'));
 
-  chart.draw(data, options);
+function msToTime(timeStamp) {
+  const ms = timeStamp % 1000;
+  timeStamp = (timeStamp - ms) / 1000;
+  const secs = timeStamp % 60;
+  timeStamp = (timeStamp - secs) / 60;
+  const mins = timeStamp % 60;
+  const hrs = (timeStamp - mins) / 60;
+
+  return (hrs ? hrs + ':' : '') + (mins ? mins + ':' : '') + secs;
 }
