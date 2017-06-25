@@ -12,12 +12,21 @@ const lineOptions = {
   curveType: 'function',
   legend: { position: 'right' },
   chartArea: {width: '50%'},
-  chartAlign: 'left'
-};
+  crosshair: { trigger: 'both' },
+  vAxis: {
+  //  title: "Percentage Uptime",
+    viewWindowMode:'explicit',
+    viewWindow:{
+      // max:100,
+      min:0
+    }
+  }
+}
 const barLabels = lineLabels.slice(1);
 const barOptions =  {
   title: 'BARS, YO!',
-  chartArea: {width: '50%'}
+  chartArea: {width: '50%'},
+  is3D: true
 }
 
 let lineChart, lineData, barChart, barData;
@@ -43,7 +52,7 @@ function drawCharts() {
 function lineSelect() {
   const selected = lineChart.getSelection()[0];
   if (selected) {
-    fetch('/images:')
+    $('.framePictureCanvas img').attr('src', `photos/${selected.row}.png`)
   }
 }
 
