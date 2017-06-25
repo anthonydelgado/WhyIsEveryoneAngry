@@ -20,7 +20,7 @@ const barOptions =  {
   chartArea: {width: '50%'}
 }
 
-let lineChart, barChart;
+let lineChart, lineData, barChart, barData;
 
 google.charts.load('current', {'packages':['corechart']});
 google.charts.setOnLoadCallback(createCharts);
@@ -28,6 +28,7 @@ google.charts.setOnLoadCallback(createCharts);
 function createCharts() {
   lineChart = new google.visualization.LineChart(document.getElementById('time-series'));
   barChart = new google.visualization.BarChart(document.getElementById('bar-chart'));
+  google.visualization.events.addListener(lineChart, 'select', lineSelect);
 }
 
 function drawCharts() {
@@ -37,6 +38,13 @@ function drawCharts() {
   const barData = google.visualization.arrayToDataTable(barFormatted);
   lineChart.draw(lineData, lineOptions);
   barChart.draw(barData, barOptions);
+}
+
+function lineSelect() {
+  const selected = lineChart.getSelection()[0];
+  if (selected) {
+    fetch('/images:')
+  }
 }
 
 function lineFormat(imgData) {
