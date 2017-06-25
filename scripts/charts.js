@@ -11,22 +11,29 @@ const lineOptions = {
   title: 'Audience Reaction',
   curveType: 'function',
   legend: { position: 'right' },
-  chartArea: {width: '50%'},
-  crosshair: { trigger: 'both' },
+  chartArea: {width: '60%'},
+  crosshair: { trigger: 'both', color: 'grey'},
   vAxis: {
-  //  title: "Percentage Uptime",
-    viewWindowMode:'explicit',
+   title: "Average ",
+    // viewWindowMode:'explicit',
     viewWindow:{
-      // max:100,
-      min:0
-    }
-  }
+      min:0,
+    },
+  },
+  animation: {
+    duration: 1000,
+    easing: 'out',
+  },
 }
 const barLabels = lineLabels.slice(1);
 const barOptions =  {
   title: 'BARS, YO!',
   chartArea: {width: '50%'},
-  is3D: true
+  is3D: true,
+  animation: {
+    duration: 1000,
+    easing: 'out',
+  }
 }
 
 let lineChart, lineData, barChart, barData;
@@ -43,18 +50,33 @@ function createCharts() {
 function drawCharts() {
   const lineFormatted = lineFormat(imageData);
   const barFormatted = barFormat(lineFormatted);
-  const lineData = google.visualization.arrayToDataTable(lineFormatted);
-  const barData = google.visualization.arrayToDataTable(barFormatted);
+  lineData = google.visualization.arrayToDataTable(lineFormatted);
+  barData = google.visualization.arrayToDataTable(barFormatted);
   lineChart.draw(lineData, lineOptions);
   barChart.draw(barData, barOptions);
 }
 
 function lineSelect() {
   const selected = lineChart.getSelection()[0];
-  if (selected) {
-    $('.framePictureCanvas img').attr('src', `photos/${selected.row}.png`)
+  if (selected && selected.row) {
+    let idx = selected.row;
+    $('.framePictureCanvas img').attr('src', `photos/${idx}.png`)
+    // display prev and next text snippets
+    let snippet = [];
+    const next = phrases.indexOf(imageData[idx].time);
+    if (next > 0) {
+      snippet.push(phrases.slice(next - 1, next + 1))
+    } else if (next === 0) {
+      snippet.push(phrases[0])
+    } else if (next === -1 && phrases.lenght) {
+      snippet.push(phrases[phrases.length - 1]);
+    }
+    console.log('SNIP: ', snippet)
   }
 }
+
+// if equal or over
+  // grab curr (if exists) and prev snippets
 
 function lineFormat(imgData) {
   const data = [lineLabels];

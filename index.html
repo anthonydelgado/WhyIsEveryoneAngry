@@ -110,13 +110,13 @@
             if(typeof result.result === 'string') {
               console.log('Could not get data from azure')
             } else {
-              console.log('Received', result);
+              // console.log('Received', result);
               frame.photoId = result.photoId;
               frame.emotions = result.result;
               imageData.push(frame);
               drawCharts();
               $('.framePictureCanvas img').attr('src', `photos/${imageData.length - 1}.png`)
-              console.log('Total image date', imageData);
+              // console.log('Total image date', imageData);
             }
           }
         }
