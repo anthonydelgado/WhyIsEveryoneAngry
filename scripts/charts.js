@@ -97,9 +97,11 @@ function lineSelect() {
     $('#speechCanvas').html(divs);
     speechCanvas.scrollTop = speechCanvas.scrollHeight;
 
-    const gaugeFormatted = gaugeFormat(imageData[idx - 1]);
-    gaugeData = google.visualization.arrayToDataTable(gaugeFormatted);
-    if (gaugeData) gaugeChart.draw(gaugeData, gaugeOptions);
+    // const gaugeFormatted = gaugeFormat(imageData[idx - 1]);
+    // const lineFormatted = lineFormat(imageData);
+    // const gaugeFormatted = gaugeFormat(lineFormatted);
+    // gaugeData = google.visualization.arrayToDataTable(gaugeFormatted);
+    // if (gaugeData) gaugeChart.draw(gaugeData, gaugeOptions);
   }
 }
 
@@ -165,6 +167,6 @@ function gaugeFormat(lineData) {
                           .map(frame => frame.slice(1))
                           .reduce((acc, frame) => frame.map((emote, i) => emote + acc[i]))
   const averages = totals.map(emote => emote / frameCount);
-  const formatted = averages.map((avg, i) => [barLabels[i], avg]);
+  const formatted = averages.map((avg, i) => [barLabels[i], avg * 100]);
   return [['y', 'x'], ...formatted];
 }

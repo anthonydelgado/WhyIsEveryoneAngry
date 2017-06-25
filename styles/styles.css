@@ -79,3 +79,8 @@ div {
   width: 100%;
   flex-direction: column;
 }
+
+.title {
+  font-size: 75px;
+  margin: 20px;
+}
