@@ -60,23 +60,33 @@ function lineSelect() {
   const selected = lineChart.getSelection()[0];
   if (selected && selected.row) {
     let idx = selected.row;
+    let timeStamp = imageData[idx].time
     $('.framePictureCanvas img').attr('src', `photos/${idx}.png`)
     // display prev and next text snippets
     let snippet = [];
-    const next = phrases.indexOf(imageData[idx].time);
-    if (next > 0) {
-      snippet.push(phrases.slice(next - 1, next + 1))
-    } else if (next === 0) {
-      snippet.push(phrases[0])
-    } else if (next === -1 && phrases.lenght) {
-      snippet.push(phrases[phrases.length - 1]);
+    let next;
+    console.log('PHRASES: ', phrases)
+    for (let p in phrases) {
+      if (phrases[p].time >= timeStamp) {
+        snippet.push(phrases[p]);
+        break;
+      } else if (phrases[p].time > timeStamp - 20000) {
+        snippet.push(phrases[p]);
+      }
     }
-    console.log('SNIP: ', snippet)
+    const divs = snippet.map(p =>
+      `<div class="phrase">
+        <div class="timestamp">
+          <span>${millisToMinutesAndSeconds(p.time)}</span>
+        </div>
+        <div class="content">
+          <span>${p.content}</span>
+        </div>
+      </div>`
+    );
+    speechCanvas.html(divs);
   }
 }
-
-// if equal or over
-  // grab curr (if exists) and prev snippets
 
 function lineFormat(imgData) {
   const data = [lineLabels];

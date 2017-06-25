@@ -109,6 +109,7 @@ document.addEventListener("DOMContentLoaded", function () {
             Setup();
         }
 
+        phrases = [];
         $('.speechCanvas').get(0).innerHTML = "";
         RecognizerStart(SDK, recognizer);
         //time = Date.now();
@@ -122,7 +123,6 @@ document.addEventListener("DOMContentLoaded", function () {
         RecognizerStop(SDK, recognizer);
         startBtn.disabled = false;
         stopBtn.disabled = true;
-        phrases = [];
 
         clearInterval(interval);
     });
