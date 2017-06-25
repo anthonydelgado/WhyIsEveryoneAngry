@@ -44,12 +44,12 @@
 
       <div class="charts">
         <div class="timeChart">
-          <h2>Time chart</h2>
+          <h2>Sentiment Over Time</h2>
           <div class="timeChartCanvas" id="time-series"></div>
         </div>
         <div class="avgChart">
-          <h2>Average chart</h2>
-          <div class="avgChartCanvas"></div>
+          <h2>Average Sentiment</h2>
+          <div class="avgChartCanvas" id="bar-chart"></div>
         </div>
       </div>
 
@@ -114,7 +114,7 @@
               frame.photoId = result.photoId;
               frame.emotions = result.result;
               imageData.push(frame);
-              drawChart();
+              drawCharts();
               $('.framePictureCanvas img').attr('src', `photos/${imageData.length - 1}.png`)
               console.log('Total image date', imageData);
             }
