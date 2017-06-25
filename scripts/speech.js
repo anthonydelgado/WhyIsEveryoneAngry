@@ -90,10 +90,11 @@ document.addEventListener("DOMContentLoaded", function () {
     stopBtn = document.getElementById("stopBtn");
     hypothesisDiv = document.getElementById("hypothesisDiv");
     statusDiv = document.getElementById("statusDiv");
-    speechCanvas = $('.speechCanvas');
+    speechCanvas = document.getElementById('speechCanvas');
     key = document.getElementById("key");
     languageOptions = document.getElementById("languageOptions");
     formatOptions = document.getElementById("formatOptions");
+    timer = $('#timer');
 
     languageOptions.addEventListener("change", function () {
         Setup();
@@ -136,7 +137,7 @@ document.addEventListener("DOMContentLoaded", function () {
 function updateTimer() {
   time = Date.now() - window.startTime;
   // console.log(time)
-  $('#timer').html(`Ellapsed Time: ${millisToMinutesAndSeconds(time)}`);
+  timer.html(`Ellapsed Time: ${millisToMinutesAndSeconds(time)}`);
 }
 
 function Setup() {
@@ -182,7 +183,8 @@ function UpdateRecognizedPhrase(json) {
           </div>
         </div>`
       );
-      speechCanvas.html(divs);
+      $('#speechCanvas').html(divs);
+      speechCanvas.scrollTop = speechCanvas.scrollHeight;
     }
     return;
 }

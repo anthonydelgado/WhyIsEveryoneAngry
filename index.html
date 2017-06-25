@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Giancarlo Lives! (Pending Title)</title>
+    <title>Why Is Everyone Angry?</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link rel="stylesheet" href="styles/reset.css">
     <link rel="stylesheet" href="styles/styles.css">
@@ -12,7 +12,7 @@
   <body>
 
     <div class="top">
-      <h1>Giancarlo Lives! (Pending Title)</h1>
+      <h1>Why Is Everyone Angry?</h1>
       <div class="record">
         <h2>Recording</h2>
         <button id="startBtn" disabled="disabled" onclick="startRecordingFrames()">Start</button>
@@ -23,7 +23,7 @@
     <div class="stream">
 
       <div class="video">
-        <h2>Live Stream</h2>
+        <h2>Current Video</h2>
         <div class="videoCanvas">
           <div class="camera">
             <video id="video">Video stream not available.</video>
@@ -35,7 +35,7 @@
 
       <div class="speech">
         <h2>Speech</h2>
-        <div class="speechCanvas"></div>
+        <div class="speechCanvas" id="speechCanvas"></div>
       </div>
 
     </div>
@@ -44,25 +44,25 @@
 
       <div class="charts">
         <div class="timeChart">
-          <h2>Sentiment Over Time</h2>
+          <h2>Sentiment Analysis: Audience Reaction</h2>
           <div class="timeChartCanvas" id="time-series"></div>
         </div>
         <div class="avgChart">
-          <h2>Average Sentiment</h2>
+          <h2>Average Sentiment (Entire Presentation)</h2>
           <div class="avgChartCanvas" id="bar-chart"></div>
         </div>
       </div>
 
       <div class="frame">
         <div class="framePicture">
-          <h2>framePicture</h2>
+          <h2>Current Frame</h2>
           <div class="framePictureCanvas">
             <img src="" />
           </div>
         </div>
         <div class="frameInfo">
-          <h2>frameInfo</h2>
-          <div class="frameInfoCanvas"></div>
+          <h2>Sentiment Analysis: Current Frame</h2>
+          <div class="frameInfoCanvas" id="gauge-chart"></div>
         </div>
       </div>
 

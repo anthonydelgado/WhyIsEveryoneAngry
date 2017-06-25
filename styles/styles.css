@@ -1,6 +1,7 @@
 body {
   background-color: #555;
   font-family: 'Roboto', sans-serif;
+  color: white;
 }
 
 div {
@@ -19,6 +20,10 @@ div {
   flex-direction: column;
   min-height: 400px;
   width: 50%;
+}
+
+.speechCanvas {
+  color: black;
 }
 
 .videoCanvas,
