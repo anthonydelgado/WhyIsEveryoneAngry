@@ -1,5 +1,5 @@
 ## Inspiration
-Public speaking is hard. In the heat of the moment, it can be difficult to tell whether a part of your speech / presentation / performance is most or least effective.
+Public speaking is hard. In the heat of the moment, it can be difficult to tell which parts of your speech / presentation / performance is most or least effective.
 
 ## What it does
 Armed with the power of data, discover which parts of your talk elicited which reactions. Reflect on the data to get exactly the reaction you want in your next talk.
