@@ -29,7 +29,7 @@ let idx = 0;
 // **************************************************************
 // Get NGROK route: run 'ngrok http 3000'
 // This won't be necessary when we deploy
-let ngrokLink = 'http://7b42f60b.ngrok.io';
+let BASE_URL = process.env.BASE_URL || 'http://b322ba74.ngrok.io';
 // **************************************************************
 
 // Upload photo and make call to azure
@@ -44,7 +44,7 @@ app.post('/api/upload', function(req, res) {
         url: 'https://westus.api.cognitive.microsoft.com/emotion/v1.0/recognize',
         headers: { 'Ocp-Apim-Subscription-Key': 'd345949196d84d69a02cf3f73067aafc' },
         body: JSON.stringify({
-          url: ngrokLink + '/photo/' + (idx - 1),
+          url: BASE_URL + '/photo/' + (idx - 1),
         })
       })
       .catch(err => console.log(err))
@@ -71,6 +71,6 @@ app.get('/upload/reset', function(req, res){
   res.send('reset');
 })
 
-
-console.log('serving on http://localhost:3000');
-app.listen(3000);
+const PORT = process.env.PORT || 3000;
+console.log(`serving on ${BASE_URL}:${PORT}`);
+app.listen(PORT);
