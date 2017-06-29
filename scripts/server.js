@@ -44,7 +44,7 @@ app.post('/api/upload', function(req, res) {
         url: 'https://westus.api.cognitive.microsoft.com/emotion/v1.0/recognize',
         headers: { 'Ocp-Apim-Subscription-Key': 'd345949196d84d69a02cf3f73067aafc' },
         body: JSON.stringify({
-          url: BASE_URL + '/photo/' + (idx - 1),
+          url: `${BASE_URL}/photo/${idx - 1}`,
         })
       })
       .catch(err => console.log(err))
