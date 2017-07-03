@@ -2,6 +2,8 @@
 
 **3rd Prize Winner: [Global AI Hackathon NYC]**
 
+* [Try the app now]
+
 Inspiration
 ------
 
@@ -23,11 +25,24 @@ Team
 * [David Hamberlin]
 * [Willian Hua]
 
+<h3 align="center">
+  <img src="https://dl.dropboxusercontent.com/s/tlmugweu5q2t1u0/wyea_01.png?dl=0" alt="d3-mini-game gameplay screenshot" />
+</h3>
+
+<h3 align="center">
+  <img src="https://dl.dropboxusercontent.com/s/c2w2vai2e8pn8lj/wyea_02.png?dl=0" alt="d3-mini-game gameplay screenshot" />
+</h3>
+
+<h3 align="center">
+  <img src="https://dl.dropboxusercontent.com/s/ftoiv6cpp0jxxm2/wyea_03.png?dl=0" alt="d3-mini-game gameplay screenshot" />
+</h3>
+
 <!---
 Link References
 -->
 
 [Global AI Hackathon NYC]:https://ai-hackathon-nyc.devpost.com/
+[Try the app now]:https://whyiseveryoneangry.herokuapp.com/
 [Arturo Ruvalcaba]:https://github.com/aruvham
 [David Hamberlin]:https://github.com/dhamberlin
 [Willian Hua]:https://github.com/huawillian
