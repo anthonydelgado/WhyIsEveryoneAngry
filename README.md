@@ -4,13 +4,10 @@
 
 * [Try the app now]
 
-Inspiration
-------
+## Inspiration
+Public speaking is hard. In the heat of the moment, it can be difficult to tell which parts of your speech / presentation / performance are most or least effective.
 
-Public speaking is hard. In the heat of the moment, it can be difficult to tell whether a part of your speech/presentation/performance is most or least effective.
-
-What it does
-------
+## What it does
 
 Armed with the power of data, discover which parts of your talk elicited which reactions. Reflect on the data to get exactly the reaction you want in your next talk.
 
@@ -26,15 +23,15 @@ Team
 * [Willian Hua]
 
 <h3 align="center">
-  <img src="https://dl.dropboxusercontent.com/s/tlmugweu5q2t1u0/wyea_01.png?dl=0" alt="d3-mini-game gameplay screenshot" />
+  <img src="https://dl.dropboxusercontent.com/s/tlmugweu5q2t1u0/wyea_01.png?dl=0" alt="screenshot" />
 </h3>
 
 <h3 align="center">
-  <img src="https://dl.dropboxusercontent.com/s/c2w2vai2e8pn8lj/wyea_02.png?dl=0" alt="d3-mini-game gameplay screenshot" />
+  <img src="https://dl.dropboxusercontent.com/s/c2w2vai2e8pn8lj/wyea_02.png?dl=0" alt="screenshot" />
 </h3>
 
 <h3 align="center">
-  <img src="https://dl.dropboxusercontent.com/s/ftoiv6cpp0jxxm2/wyea_03.png?dl=0" alt="d3-mini-game gameplay screenshot" />
+  <img src="https://dl.dropboxusercontent.com/s/ftoiv6cpp0jxxm2/wyea_03.png?dl=0" alt="d3gameplay screenshot" />
 </h3>
 
 <!---
